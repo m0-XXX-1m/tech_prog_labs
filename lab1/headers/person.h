@@ -1,11 +1,13 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+#include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
+#include <stdexcept>
 
-namespace Person
+namespace Persons
 {
     class Person
     {
@@ -14,13 +16,13 @@ namespace Person
         std::string patronimc;
 
     public:
-        Person(const std::string& s = "-", const std::string& n = "-", const std::string& p = "-");
+        Person(const std::string& = "-", const std::string& = "-", const std::string& = "-");
         Person(const Person&);
-        virtual ~Person();
+        virtual ~Person() = default;
 
-        std::string& getName() const;
-        std::string& getSurname() const;
-        std::string& getPatronimic() const;
+        std::string getName() const;
+        std::string getSurname() const;
+        std::string getPatronimic() const;
 
         void setName(std::string&);
         void setSurname(std::string&);

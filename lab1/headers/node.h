@@ -3,15 +3,15 @@
 
 #include "person.h"
 
-namespace Node
+namespace Nodes
 {
     class Node
     {
     public:
-        // Person::Person* person;
+        // Persons::Person* person;
 
-        Person::Person* left;
-        Person::Person* right;
+        Persons::Person* left;
+        Persons::Person* right;
         size_t pos;
         
         Node();

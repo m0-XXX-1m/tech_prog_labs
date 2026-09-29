@@ -7,20 +7,20 @@ namespace Keeper
 {
     class University
     {
-        // Node::Node* first;
-        // Node::Node* last;
+        // Nodes::Node* first;
+        // Nodes::Node* last;
 
-        Node::Node* head;
+        Nodes::Node* head;
         size_t size;
 
     public:
         University();
         ~University();
 
-        Node::Node* getHead() const;
+        Nodes::Node* getHead() const;
         size_t getSize() const;
 
-        void setHead(Node::Node*);
+        void setHead(Nodes::Node*);
         void setSize();
 
         bool isEmpty() const;
@@ -28,11 +28,11 @@ namespace Keeper
         void saveToFile() const;
         void readFromFile();
 
-        void addRecord(const Person::Person&);
+        void addRecord(const Persons::Person&);
         // Person::Person* findRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "", size_t pos);
-        Node::Node* findRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "", size_t pos);
+        Nodes::Node* findRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "", size_t pos);
         void removeRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "");
-        void recountPositions(Node::Node*);
+        void recountPositions(Nodes::Node*);
     };
 }
 

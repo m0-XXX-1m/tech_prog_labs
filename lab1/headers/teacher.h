@@ -5,7 +5,7 @@
 
 namespace Teacher
 {
-    class Teacher : public Person::Person
+    class Teacher : public Persons::Person
     {
         std::vector<std::string> groups;
         std::vector<std::string> subjects;

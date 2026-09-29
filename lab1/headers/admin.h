@@ -3,22 +3,22 @@
 
 #include "keeper.h"
 
-namespace Admin
+namespace Admins
 {
-    class Admin: public Person::Person
+    class Admin: public Persons::Person
     {
         std::string post;
         std::string phone;
         std::string respArea;
         
     public:
-        Admin(const std::string& s = "-", const std::string& n = "-", const std::string& p = "-",
-            const std::string& pst = "-", const std::string& phn = "-", const std::string& ra = "-");
+        Admin(const std::string& = "-", const std::string& = "-", const std::string& = "-",
+            const std::string& = "-", const std::string& = "-", const std::string& = "-");
         ~Admin() = default;
 
-        std::string& getPost() const;
-        std::string& getPhone() const;
-        std::string& getRespArea() const;
+        std::string getPost() const;
+        std::string getPhone() const;
+        std::string getRespArea() const;
 
         void setPost(std::string&);
         void setPhone(std::string&);

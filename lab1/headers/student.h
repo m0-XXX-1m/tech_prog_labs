@@ -3,9 +3,9 @@
 
 #include "keeper.h"
 
-namespace Student
+namespace Students
 {
-    class Student : public Person::Person
+    class Student : public Persons::Person
     {
         std::string group;
         std::string spec;
