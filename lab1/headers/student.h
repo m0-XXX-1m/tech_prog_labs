@@ -1,7 +1,8 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include "keeper.h"
+// #include "keeper.h"
+#include "person.h"
 
 namespace Students
 {
@@ -13,19 +14,21 @@ namespace Students
         double averageGrade;
 
     public:
-        Student(const std::string& s = "-", const std::string& n = "-", const std::string& p = "-",
-            const std::string& g = "-", const std::string& spec = "-", unsigned int c = 0, double ag = -1);
+        Student(const std::string& = "-", const std::string& = "-", const std::string& = "-",
+            const std::string& = "-", const std::string& = "-", unsigned int = 0, double = -1);
         ~Student() = default;
 
-        std::string& getGroup() const;
-        std::string& getSpec() const;
+        std::string getGroup() const;
+        std::string getSpec() const;
         unsigned int getCourse() const;
         double getAvrGr() const;
+        int getRoleRank() const override;
 
         void setGroup(std::string&);
         void setSpec(std::string&);
         void setCourse(unsigned int);
         void setAvrGr(double);
+        void setAvrGr(int*, size_t);
 
         void saveToFile(std::ofstream&) const override;
         void readDataFromFile(std::ifstream&) override;

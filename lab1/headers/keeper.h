@@ -2,37 +2,44 @@
 #define KEEPER_H
 
 #include "node.h"
+#include "admin.h"
+#include "teacher.h"
+#include "student.h"
 
 namespace Keeper
 {
     class University
     {
-        // Nodes::Node* first;
-        // Nodes::Node* last;
-
         Nodes::Node* head;
         size_t size;
+
+        Nodes::Node* merge(Nodes::Node*, Nodes::Node*);
+        void split(Nodes::Node*, const std::string&, Nodes::Node**, Nodes::Node**); /* const */
+        // void findHelper(Nodes::Node*, int, const std::string&, const std::string&, const std::string&, std::vector<Nodes::Node*>&);
+        void removeHelper(Nodes::Node*&, int, const std::string&, const std::string& = "", const std::string& = "");
+        void postOrderDelete(Nodes::Node*);
 
     public:
         University();
         ~University();
 
-        Nodes::Node* getHead() const;
+        Nodes::Node* getHead();
         size_t getSize() const;
 
         void setHead(Nodes::Node*);
-        void setSize();
+        void setSize(size_t);
 
         bool isEmpty() const;
 
-        void saveToFile() const;
-        void readFromFile();
+        void saveToFile(std::ofstream&) const;
+        void readFromFile(std::ifstream&);
 
-        void addRecord(const Persons::Person&);
-        // Person::Person* findRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "", size_t pos);
-        Nodes::Node* findRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "", size_t pos);
-        void removeRecord(const std::string& s = "", const std::string& n = "", const std::string& p = "");
-        void recountPositions(Nodes::Node*);
+        void addRecord(Persons::Person&/* , Nodes::Node*& */);
+        std::vector<Nodes::Node*> findRecords(int, const std::string&, const std::string& = "", const std::string& = "");
+        // std::vector<Nodes::Node*> findRecordsBST(int, const std::string&, const std::string& = "", const std::string& = "");
+        void removeRecords(int, const std::string&, const std::string& = "", const std::string& = "");
+        void recountPositions();
+        void printMembers() const;
     };
 }
 

@@ -1,7 +1,8 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-#include "keeper.h"
+// #include "keeper.h"
+#include "person.h"
 
 namespace Admins
 {
@@ -19,6 +20,7 @@ namespace Admins
         std::string getPost() const;
         std::string getPhone() const;
         std::string getRespArea() const;
+        int getRoleRank() const override;
 
         void setPost(std::string&);
         void setPhone(std::string&);

@@ -21,6 +21,11 @@ std::string Admin::getRespArea() const
     return respArea;
 }
 
+int Admin::getRoleRank() const
+{
+    return 1;
+}
+
 void Admin::setPost(std::string& pst)
 {
     post = pst;
@@ -67,7 +72,8 @@ void Admin::readDataFromFile(std::ifstream& f)
         throw std::runtime_error("Error while openning a file to read");
     }
 
-    enum fields{
+    enum fields
+    {
         surname,
         name,
         patronimic,
@@ -75,19 +81,22 @@ void Admin::readDataFromFile(std::ifstream& f)
         phone,
         respArea
     } flds = fields::surname;
-    short st_flag = 0;
+    short st_flag = /* 0 */1;
     short escape = 0;
 
     std::string line;
     while (std::getline(f, line) && !escape)
     {
         if (!line.empty() && line.back() == '\r') line.pop_back();
-        if (line[0] == '#' && line.substr(1) == "ADMIN"
-            && !st_flag)
+        /* if (line[0] == '#' &&
+            line.substr(1) == "ADMIN" &&
+            !st_flag)
         {
             st_flag = 1;
             continue;
-        }
+        } */
+
+        if (line.empty()) continue;
         
         if (st_flag)
         {
@@ -131,7 +140,9 @@ void Admin::readDataFromFile(std::ifstream& f)
                 case fields::respArea:
                 {
                     this->respArea = line;
-                    escape = 1; 
+                    escape = 1;
+
+                    break;
                 }
             }
         }

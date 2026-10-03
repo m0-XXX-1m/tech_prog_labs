@@ -10,12 +10,14 @@ namespace Nodes
     public:
         // Persons::Person* person;
 
-        Persons::Person* left;
-        Persons::Person* right;
+        Persons::Person* data;
+        Node* left;
+        Node* right;
         size_t pos;
         
         Node();
-        ~Node();
+        Node(Persons::Person&);
+        ~Node() = default;
     };
 }
 

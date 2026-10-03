@@ -1,9 +1,10 @@
 #ifndef TEACHER_H
 #define TEACHER_H
 
-#include "keeper.h"
+// #include "keeper.h"
+#include "person.h"
 
-namespace Teacher
+namespace Teachers
 {
     class Teacher : public Persons::Person
     {
@@ -11,12 +12,13 @@ namespace Teacher
         std::vector<std::string> subjects;
 
     public:
-        Teacher(const std::string& s = "-", const std::string& n = "-", const std::string& p = "-",
-            const std::vector<std::string>& grps = {}, const std::vector<std::string>& sbjs = {});
+        Teacher(const std::string& = "-", const std::string& = "-", const std::string& = "-",
+            const std::vector<std::string>& = {}, const std::vector<std::string>& = {});
         ~Teacher() = default;
 
-        std::vector<std::string>& getGrps() const;
-        std::vector<std::string>& getSbjs() const;
+        std::vector<std::string> getGrps() const;
+        std::vector<std::string> getSbjs() const;
+        int getRoleRank() const override;
 
         void setGrps(std::vector<std::string>&);
         void setSbjs(std::vector<std::string>&);

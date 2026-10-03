@@ -23,6 +23,7 @@ namespace Persons
         std::string getName() const;
         std::string getSurname() const;
         std::string getPatronimic() const;
+        virtual int getRoleRank() const = 0;
 
         void setName(std::string&);
         void setSurname(std::string&);
