@@ -94,7 +94,7 @@ University::~University()
     size = 0;
 }
 
-Nodes::Node* University::getHead()
+const Nodes::Node* University::getHead() const
 {
     return head;
 }
@@ -183,58 +183,6 @@ void University::split(Nodes::Node* cur, const std::string& s, Nodes::Node** lft
 
 void University::addRecord(Persons::Person& p/* , Nodes::Node*& n */)
 {
-    /* if (!n)
-    {
-        n = new Nodes::Node(p);
-        // if (n == head) n->pos = 1;
-        ++ size;
-        return;
-    }
-
-    int curNodeRole = n->data->getRoleRank();
-    int persRole = p.getRoleRank();
-
-    if (persRole >= curNodeRole)
-    {
-        if (p.getSurname() >= n->data->getSurname())
-        {
-            addRecord(p, n->right);
-        }
-        else
-        {
-            addRecord(p, n->left);
-        }
-    }
-    else
-    {
-        Nodes::Node* nw = new Nodes::Node(p);
-        split(n, p.getSurname(), &nw->left, &nw->right);
-
-        n = nw;
-        ++ size;
-    } */
-
-    /* if (!n)
-    {
-        n = new Nodes::Node(p);
-        ++size;
-        return;
-    }
-
-    if (p.getRoleRank() < n->data->getRoleRank())
-    {
-        Nodes::Node* nw = new Nodes::Node(p);
-        split(n, p.getSurname(), &nw->left, &nw->right);
-        n = nw;
-        ++size;
-        return;
-    }
-
-    if (p.getSurname() < n->data->getSurname())
-        addRecord(p, n->left);
-    else
-        addRecord(p, n->right); */
-
     Nodes::Node* l = nullptr;
     Nodes::Node* r = nullptr;
     split(head, p.getSurname(), &l, &r);
@@ -362,67 +310,6 @@ void University::removeRecords(int rank, const std::string& s, const std::string
 
     recountPositions();
 }
-
-/* void University::addRecord(Persons::Person& p, Nodes::Node* n, Nodes::Node* prev)
-{
-    if (!head)
-    {
-        head = new Nodes::Node(p);
-        head->pos = 1;
-        ++ size;
-
-        return;
-    }
-    else
-    {
-        if (!n) n = head;
-        
-        int curNodeRole = n->data->getRoleRank();
-        int persRole = p.getRoleRank();
-
-        if (persRole >= curNodeRole)
-        {
-            if (p.getSurname() >= n->data->getSurname())
-            {
-                if (!n->right)
-                {
-                    n->right = new Nodes::Node(p);
-                    recountPosFrom(n);
-                }
-                else addRecord(p, n->right, n);
-            }
-            else
-            {
-                if (!n->left)
-                {
-                    n->left = new Nodes::Node(p);
-                    recountPosFrom(n);
-                }
-                else addRecord(p, n->left, n);
-            }
-        }
-        else
-        {   
-            Nodes::Node* nw = new Nodes::Node(p);
-            if (n == head)
-            {
-                head = nw;
-            }
-            else
-            {
-                if (prev->right == n) prev->right = nw;
-                else prev->left = nw;
-            }
-            
-            if (p.getSurname() >= n->data->getSurname()) nw->right = n;
-            else nw->left = n;
-
-            nw->pos = n->pos;
-            recountPosFrom(nw);
-        }
-        ++ size;
-    }
-} */
 
 void University::printMembers() const
 {

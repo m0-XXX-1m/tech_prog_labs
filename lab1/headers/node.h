@@ -8,8 +8,6 @@ namespace Nodes
     class Node
     {
     public:
-        // Persons::Person* person;
-
         Persons::Person* data;
         Node* left;
         Node* right;

@@ -1,7 +1,6 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-// #include "keeper.h"
 #include "person.h"
 
 namespace Admins

@@ -48,14 +48,6 @@ void Admin::saveToFile(std::ofstream& f) const
         throw std::runtime_error("Error while openning a file to write");
     }
 
-    /* f << "#ADMIN\n"
-        << "SURNAME=" << getSurname() << "\n"
-        << "NAME=" << getName() << "\n"
-        << "PATRONIMIC=" << getPatronimic()<< "\n"
-        << "POST=" << post << "\n"
-        << "PHONE=" << phone << "\n"
-        << "PESP_AREA" << respArea << "\n"; */
-
     f << "#ADMIN\n"
         << getSurname() << '\n'
         << getName() << '\n'

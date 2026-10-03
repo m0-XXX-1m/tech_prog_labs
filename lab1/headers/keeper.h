@@ -23,7 +23,7 @@ namespace Keeper
         University();
         ~University();
 
-        Nodes::Node* getHead();
+        const Nodes::Node* getHead() const;
         size_t getSize() const;
 
         void setHead(Nodes::Node*);

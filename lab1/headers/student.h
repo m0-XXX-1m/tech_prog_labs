@@ -1,7 +1,6 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-// #include "keeper.h"
 #include "person.h"
 
 namespace Students
