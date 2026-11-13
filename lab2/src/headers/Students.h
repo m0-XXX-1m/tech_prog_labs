@@ -1,6 +1,7 @@
 #ifndef STUDENTS_H
 #define STUDENTS_H
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <stdexcept>
@@ -28,7 +29,8 @@ namespace Students
         void setFIO(std::string FIO);
         void setGrades(std::vector<double> grades);
         void setNext(Student* st);
-
+        
+        void show() const;
         double findAvrGrade() const;
     };
 }

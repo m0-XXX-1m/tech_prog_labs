@@ -2,15 +2,14 @@
 #define GROUP_H
 
 #include "Students.h"
-#include <iostream>
 
 namespace GroupNode
 {
     class Group
     {
         std::string grName;
-        double avrGrade;
         std::vector<std::string> subjects;
+        double avrGrade;
         size_t size;
 
         Students::Student* first;
@@ -20,13 +19,14 @@ namespace GroupNode
     public:
 
         Group(std::string grName = "",
-            double avrGrade = 0,
             std::vector<std::string> subjects = {},
+            double avrGrade = 0,
+            size_t size = 0,
             Students::Student* first = nullptr,
             Students::Student* last = nullptr,
             Group* next = nullptr
         ):
-        grName(std::move(grName)), avrGrade(std::move(avrGrade)), subjects(std::move(subjects)),
+        grName(std::move(grName)), subjects(std::move(subjects)), avrGrade(std::move(avrGrade)), size(size),
         first(first), last(last), next(next) {};
         ~Group();
 
@@ -55,6 +55,8 @@ namespace GroupNode
         void setLast(Students::Student* st);
         void setNextGr(Group* gr);
 
+        std::vector<Students::Student*> find(const std::string& fullName);
+        void findAvrGrade();
         void showAll();
         void showAvrGrdFiltered(double ag);
     };

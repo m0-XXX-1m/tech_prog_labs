@@ -74,6 +74,7 @@ Students::Student* Group::operator--()
     if (last == tmp)
         last = nullptr;
 
+    tmp->setNext(nullptr);
     -- size;
     return tmp;
 }
@@ -106,36 +107,32 @@ Students::Student* Group::operator--(int)
 void Group::showAll()
 {
     if (isEmpty())
-        throw std::runtime_error("The group is empty!");
+        throw std::range_error("The group is empty!");
+
+    findAvrGrade();
 
     std::cout
-        << "Group: " << grName << '\n';
+        << "Group name: " << grName << '\n'
+        << "Group average grade: " << avrGrade << '\n'
+        << "Subjects: ";
+
+    for (auto it = subjects.begin(); it < subjects.end(); ++ it)
+    {
+        std::cout << *it;
+        if (std::next(it) != subjects.end()) std::cout << ", ";
+    }
+    std::cout << '\n';
 
     Students::Student* tmp = first;
     while (tmp)
     {
-        std::cout
-            << "Surname and initials" << tmp->getFIO() << '\n'
-            << "Marks: ";
-
-        std::vector<double>& sbj = tmp->getGrdList();
-        for (auto it = sbj.begin(); it != sbj.end(); ++ it)
-        {
-            std::cout << *it;
-            if (std::next(it) != sbj.end()) std::cout << ", ";
-        }
-        std::cout << '\n';
-
         try
         {
-            std::cout
-                << "Average grade: " << tmp->findAvrGrade() << '\n' << std::endl;
+            tmp->show();
         }
-        catch (const std::exception& e)
+        catch(const std::exception& e)
         {
-            std::cerr 
-                << "Student: " << tmp->getFIO() << '\n'
-                << e.what() << '\n' << std::endl;
+            std::cerr << e.what() << '\n';
         }
         
         tmp = tmp->getNext();
@@ -145,33 +142,80 @@ void Group::showAll()
 void Group::showAvrGrdFiltered(double ag)
 {
     if (isEmpty())
-        throw std::runtime_error("The group is empty!");
+        throw std::range_error("The group is empty!");
+
+    findAvrGrade();
 
     std::cout
-        << "Group: " << grName << '\n' << '\n';
+        << "Group name: " << grName << '\n'
+        << "Group average grade: " << avrGrade << '\n'
+        << "Subjects: ";
 
+    for (auto it = subjects.begin(); it < subjects.end(); ++ it)
+    {
+        std::cout << *it;
+        if (std::next(it) != subjects.end()) std::cout << ", ";
+    }
+    std::cout << '\n';
+    
     Students::Student* tmp = first;
     while (tmp)
     {
         try
         {
-            double currAg = tmp->findAvrGrade();
-            if (currAg > ag)
-            {
-                std::cout
-                    << "Surname and initials: " << tmp->getFIO() << '\n'
-                    << "Average grade: " << currAg << '\n' <<  std::endl;
-            }
+            if (tmp->findAvrGrade() >= ag)
+                tmp->show();
         }
-        catch (const std::exception& e)
-        {
-            std::cerr 
-                << "Student: " << tmp->getFIO() << '\n'
-                << e.what() << '\n' << std::endl;
-        }
+        catch(const std::exception& e) {}
 
         tmp = tmp->getNext();
     }
+}
+
+std::vector<Students::Student*> Group::find(const std::string& fn)
+{
+    if (isEmpty())
+        throw std::range_error("The group is empty!");
+
+    std::vector<Students::Student*> res;
+    Students::Student* tmp = first;
+    while (tmp) 
+    {
+        if (tmp->getFIO() == fn) res.push_back(tmp);
+        tmp = tmp->getNext();
+    }
+    
+
+    if (res.empty())
+        throw std::invalid_argument("No such student in the group.");
+    
+    return res;
+}
+
+void Group::findAvrGrade()
+{
+    if (isEmpty())
+        throw std::range_error("The group is empty!");
+
+    double s = 0.0;
+    int num = 0;
+    Students::Student* tmp = first;
+    while (tmp)
+    {
+        try
+        {
+            s += tmp->findAvrGrade();
+            ++ num;
+        }
+        catch(const std::exception& e)
+        {}
+        tmp = tmp->getNext();
+    }
+
+    if (num)
+        avrGrade = s / static_cast<double>(num);
+    else
+        avrGrade = 0.0;
 }
 
 Group::~Group()
@@ -179,10 +223,10 @@ Group::~Group()
     if (isEmpty()) return;
 
     Students::Student* tmp = first;
-    while (first)
+    while (tmp)
     {
-        tmp = first->getNext();
-        delete first;
-        first = tmp;
+        first = first->getNext();
+        delete tmp;
+        tmp = first;
     }
 }
